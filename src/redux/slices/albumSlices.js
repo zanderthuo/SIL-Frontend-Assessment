@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAlbumsCountForAUser, getAllAlbumsForAUser } from '../actions/albumActions';
+import { getAlbumsCountForAUser, getAllAlbumsForAUser, getAlbumById } from '../actions/albumActions';
 
 const initialState = {
   userAlbums: {},
-  userAlbum: {}, // Object to store albums for each user
+  userAlbum: {},
+  album:{}, // Object to store albums for each user
   loading: false,
   error: null,
 };
@@ -18,10 +19,7 @@ const albumsSlice = createSlice({
       })
       .addCase(getAlbumsCountForAUser.fulfilled, (state, action) => {
         state.loading = false;
-
-        // Update userAlbum object with albums for the specific user
         state.userAlbum[action.meta.arg] = action.payload;
-
         state.error = '';
       })
       .addCase(getAlbumsCountForAUser.rejected, (state, action) => {
@@ -40,6 +38,19 @@ const albumsSlice = createSlice({
       .addCase(getAllAlbumsForAUser.rejected, (state, action) => {
         state.loading = false
         state.userAlbums = {}
+        state.error = action.error.message
+      })
+      .addCase(getAlbumById.pending, state => {
+        state.loading = true
+      })
+      .addCase(getAlbumById.fulfilled, (state, action) => {
+        state.loading = false
+        state.album = action.payload
+        state.error = ''
+      })
+      .addCase(getAlbumById.rejected, (state, action) => {
+        state.loading = false
+        state.album = {}
         state.error = action.error.message
       })
   },

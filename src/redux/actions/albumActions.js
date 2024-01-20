@@ -23,3 +23,15 @@ export const getAllAlbumsForAUser = createAsyncThunk('allAlbums/getAllAlbumsForA
         throw new Error('Error fetching lalbums');
     }
 });
+
+export const getAlbumById = createAsyncThunk('allAlbums/getAlbumById', async(albumId) => {
+    try {
+
+        const response = await axiosInstance.get(`/albums/${albumId}`);
+        console.log('album by id', response.data)
+        return response.data;
+    } catch (error) {
+        // Handle any error that occurred during the API call
+        throw new Error('Error fetching Album by id');
+    }
+});
