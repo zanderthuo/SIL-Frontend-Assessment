@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAlbumsForAUser } from '../actions/albumActions';
+import { getAlbumsCountForAUser, getAllAlbumsForAUser } from '../actions/albumActions';
 
 const initialState = {
-  userAlbums: {}, // Object to store albums for each user
+  userAlbums: {},
+  userAlbum: {}, // Object to store albums for each user
   loading: false,
   error: null,
 };
@@ -12,22 +13,35 @@ const albumsSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getAlbumsForAUser.pending, (state) => {
+      .addCase(getAlbumsCountForAUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getAlbumsForAUser.fulfilled, (state, action) => {
+      .addCase(getAlbumsCountForAUser.fulfilled, (state, action) => {
         state.loading = false;
 
-        // Update userAlbums object with albums for the specific user
-        state.userAlbums[action.meta.arg] = action.payload;
+        // Update userAlbum object with albums for the specific user
+        state.userAlbum[action.meta.arg] = action.payload;
 
         state.error = '';
       })
-      .addCase(getAlbumsForAUser.rejected, (state, action) => {
+      .addCase(getAlbumsCountForAUser.rejected, (state, action) => {
         state.loading = false;
-        state.userAlbums = {};
+        state.userAlbum = {};
         state.error = action.error.message;
-      });
+      })
+      .addCase(getAllAlbumsForAUser.pending, state => {
+        state.loading = true
+      })
+      .addCase(getAllAlbumsForAUser.fulfilled, (state, action) => {
+        state.loading = false
+        state.userAlbums[action.meta.arg] = action.payload;
+        state.error = ''
+      })
+      .addCase(getAllAlbumsForAUser.rejected, (state, action) => {
+        state.loading = false
+        state.userAlbums = {}
+        state.error = action.error.message
+      })
   },
 });
 

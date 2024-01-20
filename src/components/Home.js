@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Row, Col, Card, ListGroup } from "react-bootstrap";
 import { linkStyle } from '../styles/AllStyles.js';
 import { getAllUsers } from "../redux/actions/allUsersActions.js";
-import { getAlbumsForAUser } from "../redux/actions/albumActions.js";
+import { getAlbumsCountForAUser } from "../redux/actions/albumActions.js";
 
 const Home = () => {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.allUsers.allUsers);
-  const albums = useSelector((state) => state.albums.userAlbums);
+  const albums = useSelector((state) => state.albums.userAlbum);
   const albumsLoading = useSelector((state) => state.albums.loading);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,7 @@ const Home = () => {
     const fetchAlbums = async () => {
       if (allUsers) {
         try {
-          const albumPromises = allUsers.map((user) => dispatch(getAlbumsForAUser(user.id)));
+          const albumPromises = allUsers.map((user) => dispatch(getAlbumsCountForAUser(user.id)));
           await Promise.all(albumPromises);
         } catch (error) {
           console.error("Error fetching albums:", error);

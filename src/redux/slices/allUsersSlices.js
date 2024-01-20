@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getAllUsers} from '../actions/allUsersActions'
+import {getAllUsers, getUserById} from '../actions/allUsersActions'
 
 const initialState = {
   allUsers: [],
+  user: {},
   loading: false,
   error: null,
 };
@@ -24,6 +25,19 @@ const allUsersSlice = createSlice({
     .addCase(getAllUsers.rejected, (state, action) => {
       state.loading = false
       state.allUsers = []
+      state.error = action.error.message
+    })
+    .addCase(getUserById.pending, state => {
+      state.loading = true
+    })
+    .addCase(getUserById.fulfilled, (state, action) => {
+      state.loading = false
+      state.user = action.payload
+      state.error = ''
+    })
+    .addCase(getUserById.rejected, (state, action) => {
+      state.loading = false
+      state.user = {}
       state.error = action.error.message
     })
   } 
