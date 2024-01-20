@@ -26,7 +26,7 @@ const Home = () => {
               </ListGroup.Item>
             </ListGroup>
             <Button className="text-center">
-              <Link style={linkStyle} to="/login">
+              <Link style={linkStyle} to="/user">
                 View User
               </Link>
             </Button>

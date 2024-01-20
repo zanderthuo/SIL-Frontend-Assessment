@@ -5,6 +5,7 @@ import {
   Switch
 } from 'react-router-dom';
 import './App.css';
+import PrivateRoute from './route/PrivateRoute';
 import LandingPage from './pages/LandingPage';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
@@ -20,10 +21,10 @@ function App() {
         <Switch>
           <Route path="/" component={LandingPage} exact />
           <Route path="/login" component={LoginPage} />
-          <Route path="/home" component={HomePage} />
-          <Route path="/user" component={ViewUserPage} />
-          <Route path="/album" component={ViewAlbumPage} />
-          <Route path="/photo" component={ViewPhotoPage} />
+          <PrivateRoute path="/home" component={HomePage} />
+          <PrivateRoute path="/user" component={ViewUserPage} />
+          <PrivateRoute path="/album" component={ViewAlbumPage} />
+          <PrivateRoute path="/photo" component={ViewPhotoPage} />
           {/* <PrivateRoute exact path="/" component={MainPage} />
           <PrivateRoute path="/edit-application/:applicationId" component={EditPage} />
           <PrivateRoute path="/all-application" component={AllApplicationsPage} /> */}
