@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPhotosForAnAlbum } from '../actions/photoActions';
+import { 
+  getPhotosForAnAlbum,
+  getPhotoById,
+  updatePhotoTitle
+ } from '../actions/photoActions';
 
 const initialState = {
   photos: {},
@@ -27,32 +31,32 @@ const photosSlice = createSlice({
         state.photos = {};
         state.error = action.error.message;
       })
-    //   .addCase(getAllAlbumsForAUser.pending, state => {
-    //     state.loading = true
-    //   })
-    //   .addCase(getAllAlbumsForAUser.fulfilled, (state, action) => {
-    //     state.loading = false
-    //     state.userAlbums[action.meta.arg] = action.payload;
-    //     state.error = ''
-    //   })
-    //   .addCase(getAllAlbumsForAUser.rejected, (state, action) => {
-    //     state.loading = false
-    //     state.userAlbums = {}
-    //     state.error = action.error.message
-    //   })
-    //   .addCase(getAlbumById.pending, state => {
-    //     state.loading = true
-    //   })
-    //   .addCase(getAlbumById.fulfilled, (state, action) => {
-    //     state.loading = false
-    //     state.album = action.payload
-    //     state.error = ''
-    //   })
-    //   .addCase(getAlbumById.rejected, (state, action) => {
-    //     state.loading = false
-    //     state.album = {}
-    //     state.error = action.error.message
-    //   })
+      .addCase(getPhotoById.pending, state => {
+        state.loading = true
+      })
+      .addCase(getPhotoById.fulfilled, (state, action) => {
+        state.loading = false
+        state.photo = action.payload
+        state.error = ''
+      })
+      .addCase(getPhotoById.rejected, (state, action) => {
+        state.loading = false
+        state.photo = {}
+        state.error = action.error.message
+      })
+      .addCase(updatePhotoTitle.pending, state => {
+        state.loading = true
+      })
+      .addCase(updatePhotoTitle.fulfilled, (state, action) => {
+        state.loading = false
+        state.photo = action.payload
+        state.error = ''
+      })
+      .addCase(updatePhotoTitle.rejected, (state, action) => {
+        state.loading = false
+        state.photo = {}
+        state.error = action.error.message
+      })
   },
 });
 

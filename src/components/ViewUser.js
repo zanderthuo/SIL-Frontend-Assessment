@@ -38,9 +38,7 @@ const ViewUser = () => {
             <Col md={4}>
               <h4 className="text-center">User's Details</h4>
               {userIsLoading ? (
-                <Spinner animation="border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </Spinner>
+                <Spinner animation="border" role="status" />
               ) : (
                 <ListGroup>
                   <ListGroup.Item>Name: {user.name}</ListGroup.Item>

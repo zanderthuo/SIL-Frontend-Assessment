@@ -24,7 +24,7 @@ function App() {
           <PrivateRoute path="/home" component={HomePage} />
           <PrivateRoute path="/user/:userId" component={ViewUserPage} />
           <PrivateRoute path="/album/:albumId" component={ViewAlbumPage} />
-          <PrivateRoute path="/photos/:photosId" component={ViewPhotoPage} />
+          <PrivateRoute path="/photos/:photoId" component={ViewPhotoPage} />
           <Route component={ErrorPage} />
         </Switch>
       </div>

@@ -50,9 +50,7 @@ const ViewAlbum = () => {
             <Col md={4}>
               <h4 className="text-center">Album's Details</h4>
               {albumIsLoading ? (
-                <Spinner animation="border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </Spinner>
+                <Spinner animation="border" role="status" />
               ) : (
                 <ListGroup>
                   <ListGroup.Item>Title: {album.title}</ListGroup.Item>
