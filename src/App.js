@@ -22,12 +22,9 @@ function App() {
           <Route path="/" component={LandingPage} exact />
           <Route path="/login" component={LoginPage} />
           <PrivateRoute path="/home" component={HomePage} />
-          <PrivateRoute path="/user" component={ViewUserPage} />
-          <PrivateRoute path="/album" component={ViewAlbumPage} />
-          <PrivateRoute path="/photo" component={ViewPhotoPage} />
-          {/* <PrivateRoute exact path="/" component={MainPage} />
-          <PrivateRoute path="/edit-application/:applicationId" component={EditPage} />
-          <PrivateRoute path="/all-application" component={AllApplicationsPage} /> */}
+          <PrivateRoute path="/user/:userId" component={ViewUserPage} />
+          <PrivateRoute path="/album/:albumId" component={ViewAlbumPage} />
+          <PrivateRoute path="/photos/:photoId" component={ViewPhotoPage} />
           <Route component={ErrorPage} />
         </Switch>
       </div>
