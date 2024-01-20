@@ -1,0 +1,34 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { getAlbumsForAUser } from '../actions/albumActions';
+
+const initialState = {
+  userAlbums: {}, // Object to store albums for each user
+  loading: false,
+  error: null,
+};
+
+const albumsSlice = createSlice({
+  name: 'allAlbums',
+  initialState,
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAlbumsForAUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAlbumsForAUser.fulfilled, (state, action) => {
+        state.loading = false;
+
+        // Update userAlbums object with albums for the specific user
+        state.userAlbums[action.meta.arg] = action.payload;
+
+        state.error = '';
+      })
+      .addCase(getAlbumsForAUser.rejected, (state, action) => {
+        state.loading = false;
+        state.userAlbums = {};
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default albumsSlice.reducer;
