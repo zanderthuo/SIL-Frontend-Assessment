@@ -77,3 +77,17 @@
 │
 └──App.js
 ```
+
+## How to Run the Project Locally
+
+1. Clone the repository:
+
+   ```
+        git clone https://github.com/zanderthuo/SIL-Frontend-Assessment.git
+
+        cd SIL-Frontend-Assessment
+
+        npm install
+
+        npm start
+   ```
