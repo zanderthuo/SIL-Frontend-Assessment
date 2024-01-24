@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Container, Navbar, Button, Image } from 'react-bootstrap';
 import { selectUserInfo, clearUser } from '../redux/slices/userSlices';
 import Logo from '../images/SIL.png';
@@ -8,6 +8,7 @@ import Logo from '../images/SIL.png';
 const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const userInfo = useSelector(selectUserInfo);
 
   const navbarStyle = {
@@ -24,9 +25,20 @@ const Header = () => {
     history.push('/');
   };
 
+  const handleGoBack = () => {
+    // Go back to the previous page in the history
+    history.goBack();
+  };
+
   return (
     <Navbar style={navbarStyle}>
       <Container>
+        {location.pathname !== '/' && ( // Check if not on the root path
+          <Navbar.Brand onClick={handleGoBack} style={{ cursor: 'pointer' }}>
+            {/* Use your own back button icon or text */}
+            <Button variant="outline-light">Back</Button>
+          </Navbar.Brand>
+        )}
         <Navbar.Brand href="/">
           <Image src={Logo} alt="Logo" height="60" className="d-inline-block align-top" />
         </Navbar.Brand>
@@ -42,7 +54,7 @@ const Header = () => {
                 <span>Signed in as: {userInfo.name}</span>
               </>
             ) : (
-              <Button variant="outline-light" href="/login">
+              <Button style={{color: '#fff'}} variant="outline-light" href="/login">
                 Sign In
               </Button>
             )}
