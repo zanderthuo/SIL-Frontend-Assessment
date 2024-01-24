@@ -8,7 +8,7 @@ export const getAlbumsCountForAUser = createAsyncThunk('allAlbums/getAlbumsCount
         return response.data;
     } catch (error) {
         // Handle any error that occurred during the API call
-        throw new Error('Error fetching lalbums');
+        throw new Error('Error fetching albums');
     }
 });
 
